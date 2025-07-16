@@ -18,3 +18,9 @@ license = "MPL-2.0"
 url = "https://kanidm.com"
 source = f"https://github.com/kanidm/kanidm/archive/refs/tags/v{pkgver}.tar.gz"
 sha256 = "4165a2762d5f5f6db5da34f084788f720d8f225dcbe35e00b650cefb6283bbd3"
+
+def install(self):
+    self.cargo.cinstall(wrksrc="unix_integration/nss_kanidm")
+    self.cargo.cinstall(wrksrc="unix_integration/pam_kanidm")
+    for dir in [ "tools/cli", "unix_integration/resolver", "server/daemon" ]:
+        self.cargo.install(wrksrc=dir)
